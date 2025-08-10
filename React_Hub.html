@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Hub - AI App Library & React Development Platform</title>
+    <link rel="stylesheet" href="React_Hub.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><i class="fab fa-react"></i> React Hub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#library" class="nav-link">App Library</a></li>
+                <li><a href="#create" class="nav-link">Create</a></li>
+                <li><a href="#deploy" class="nav-link">Deploy</a></li>
+                <li><a href="#community" class="nav-link">Community</a></li>
+                <li><a href="#docs" class="nav-link">Docs</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-secondary" onclick="openCreateModal()"><i class="fas fa-plus"></i> Create App</button>
+                <button class="btn-primary"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Build AI Apps with React</h1>
+            <p class="hero-subtitle">Create, deploy, and share AI-powered React applications. Connect with Replicate, HuggingFace, and modern React tools.</p>
+            <div class="hero-actions">
+                <button class="btn-primary btn-large" onclick="openCreateModal()"><i class="fab fa-react"></i> Start Building</button>
+                <button class="btn-secondary btn-large"><i class="fas fa-play"></i> Watch Demo</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>2,000+</h3>
+                    <p>React Apps</p>
+                </div>
+                <div class="stat">
+                    <h3>75K+</h3>
+                    <p>Deployments</p>
+                </div>
+                <div class="stat">
+                    <h3>15K+</h3>
+                    <p>Developers</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="app-preview">
+                <div class="app-card">
+                    <div class="app-header">
+                        <span class="app-badge">Popular</span>
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>AI Chat Interface</h4>
+                    <p>React + OpenAI + Tailwind</p>
+                    <button class="deploy-btn" onclick="deployApp('ai-chat-interface')">Deploy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create Section -->
+    <section id="create" class="create">
+        <div class="container">
+            <div class="section-header">
+                <h2>Create AI Apps with React</h2>
+                <p>Build modern AI applications using React, Next.js, and the latest AI technologies</p>
+            </div>
+            
+            <div class="create-options">
+                <div class="create-card">
+                    <div class="create-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>AI-Powered Templates</h3>
+                    <p>Start with pre-built React templates for common AI use cases</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Chat interfaces</li>
+                        <li><i class="fas fa-check"></i> Image generators</li>
+                        <li><i class="fas fa-check"></i> Data visualizations</li>
+                        <li><i class="fas fa-check"></i> Voice assistants</li>
+                    </ul>
+                    <button class="btn-primary" onclick="openTemplateModal()">Browse Templates</button>
+                    <button class="btn-secondary" onclick="openImageGenerator()" style="margin-top: 0.5rem;"><i class="fas fa-image"></i> Generate Images</button>
+                </div>
+
+                <div class="create-card">
+                    <div class="create-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Custom Development</h3>
+                    <p>Build from scratch with React, TypeScript, and modern tooling</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> React 18 + Hooks</li>
+                        <li><i class="fas fa-check"></i> TypeScript support</li>
+                        <li><i class="fas fa-check"></i> Next.js integration</li>
+                        <li><i class="fas fa-check"></i> Tailwind CSS</li>
+                    </ul>
+                    <button class="btn-primary" onclick="startCustomProject()">Start Coding</button>
+                </div>
+
+                <div class="create-card">
+                    <div class="create-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>Import Existing</h3>
+                    <p>Upload your existing React projects and enhance them with AI</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Git repository import</li>
+                        <li><i class="fas fa-check"></i> ZIP file upload</li>
+                        <li><i class="fas fa-check"></i> AI integration wizard</li>
+                        <li><i class="fas fa-check"></i> Code analysis</li>
+                    </ul>
+                    <button class="btn-primary" onclick="openImportModal()">Import Project</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Library Section -->
+    <section id="library" class="library">
+        <div class="container">
+            <div class="section-header">
+                <h2>React AI App Library</h2>
+                <p>Discover and deploy AI-powered React applications from our community</p>
+            </div>
+            
+            <!-- Search and Filters -->
+            <div class="search-filters">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search React AI apps..." class="search-input" onkeyup="filterApps()">
+                </div>
+                <div class="filters">
+                    <select class="filter-select" onchange="filterApps()">
+                        <option>All Categories</option>
+                        <option>Chat Interfaces</option>
+                        <option>Image Generation</option>
+                        <option>Data Analysis</option>
+                        <option>Voice Processing</option>
+                    </select>
+                    <select class="filter-select" onchange="filterApps()">
+                        <option>All Frameworks</option>
+                        <option>React</option>
+                        <option>Next.js</option>
+                        <option>Gatsby</option>
+                        <option>Vite</option>
+                    </select>
+                    <select class="filter-select" onchange="filterApps()">
+                        <option>Sort by: Popular</option>
+                        <option>Sort by: Newest</option>
+                        <option>Sort by: Rating</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- App Grid -->
+            <div class="apps-grid" id="appsGrid">
+                <!-- App Card 1 -->
+                <div class="app-card" data-category="Chat Interfaces" data-framework="React">
+                    <div class="app-image">
+                        <img src="https://via.placeholder.com/300x200/61dafb/ffffff?text=AI+Chat+App" alt="AI Chat App">
+                        <div class="app-overlay">
+                            <button class="preview-btn" onclick="previewApp('ai-chat-interface')"><i class="fas fa-eye"></i> Preview</button>
+                            <button class="deploy-btn" onclick="deployApp('ai-chat-interface')"><i class="fas fa-rocket"></i> Deploy</button>
+                        </div>
+                    </div>
+                    <div class="app-info">
+                        <div class="app-header">
+                            <h3>AI Chat Interface</h3>
+                            <div class="app-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <p>Modern chat interface with OpenAI integration and real-time responses</p>
+                        <div class="app-meta">
+                            <span class="framework-badge react">React</span>
+                            <span class="category-badge">Chat Interface</span>
+                        </div>
+                        <div class="app-stats">
+                            <span><i class="fas fa-download"></i> 3.2K</span>
+                            <span><i class="fas fa-star"></i> 4.9</span>
+                            <span><i class="fas fa-code-branch"></i> 234</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Card 2 -->
+                <div class="app-card" data-category="Image Generation" data-framework="Next.js">
+                    <div class="app-image">
+                        <img src="https://via.placeholder.com/300x200/764abc/ffffff?text=Image+Generator" alt="Image Generator">
+                        <div class="app-overlay">
+                            <button class="preview-btn" onclick="previewApp('ai-image-generator')"><i class="fas fa-eye"></i> Preview</button>
+                            <button class="deploy-btn" onclick="deployApp('ai-image-generator')"><i class="fas fa-rocket"></i> Deploy</button>
+                        </div>
+                    </div>
+                    <div class="app-info">
+                        <div class="app-header">
+                            <h3>AI Image Generator</h3>
+                            <div class="app-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                        <p>Generate stunning images with Stable Diffusion and React</p>
+                        <div class="app-meta">
+                            <span class="framework-badge nextjs">Next.js</span>
+                            <span class="category-badge">Image Generation</span>
+                        </div>
+                        <div class="app-stats">
+                            <span><i class="fas fa-download"></i> 2.1K</span>
+                            <span><i class="fas fa-star"></i> 4.8</span>
+                            <span><i class="fas fa-code-branch"></i> 156</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Card 3 -->
+                <div class="app-card" data-category="Data Analysis" data-framework="React">
+                    <div class="app-image">
+                        <img src="https://via.placeholder.com/300x200/38bdf8/ffffff?text=Data+Viz" alt="Data Visualization">
+                        <div class="app-overlay">
+                            <button class="preview-btn" onclick="previewApp('ai-data-dashboard')"><i class="fas fa-eye"></i> Preview</button>
+                            <button class="deploy-btn" onclick="deployApp('ai-data-dashboard')"><i class="fas fa-rocket"></i> Deploy</button>
+                        </div>
+                    </div>
+                    <div class="app-info">
+                        <div class="app-header">
+                            <h3>AI Data Dashboard</h3>
+                            <div class="app-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                        <p>Interactive data visualization with AI-powered insights</p>
+                        <div class="app-meta">
+                            <span class="framework-badge react">React</span>
+                            <span class="category-badge">Data Analysis</span>
+                        </div>
+                        <div class="app-stats">
+                            <span><i class="fas fa-download"></i> 1.5K</span>
+                            <span><i class="fas fa-star"></i> 4.7</span>
+                            <span><i class="fas fa-code-branch"></i> 98</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Card 4 -->
+                <div class="app-card" data-category="Voice Processing" data-framework="Gatsby">
+                    <div class="app-image">
+                        <img src="https://via.placeholder.com/300x200/8b5cf6/ffffff?text=Voice+App" alt="Voice App">
+                        <div class="app-overlay">
+                            <button class="preview-btn" onclick="previewApp('voice-ai-assistant')"><i class="fas fa-eye"></i> Preview</button>
+                            <button class="deploy-btn" onclick="deployApp('voice-ai-assistant')"><i class="fas fa-rocket"></i> Deploy</button>
+                        </div>
+                    </div>
+                    <div class="app-info">
+                        <div class="app-header">
+                            <h3>Voice AI Assistant</h3>
+                            <div class="app-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                            </div>
+                        </div>
+                        <p>Voice-controlled AI assistant with speech recognition</p>
+                        <div class="app-meta">
+                            <span class="framework-badge gatsby">Gatsby</span>
+                            <span class="category-badge">Voice Processing</span>
+                        </div>
+                        <div class="app-stats">
+                            <span><i class="fas fa-download"></i> 890</span>
+                            <span><i class="fas fa-star"></i> 4.6</span>
+                            <span><i class="fas fa-code-branch"></i> 67</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More -->
+            <div class="load-more">
+                <button class="btn-secondary" onclick="loadMoreApps()">Load More Apps</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deploy Section -->
+    <section id="deploy" class="deploy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Deploy React AI Apps</h2>
+                <p>Deploy your React applications to the cloud with AI integration</p>
+            </div>
+            
+            <div class="deploy-options">
+                <div class="deploy-card">
+                    <div class="deploy-icon">
+                        <i class="fab fa-vercel"></i>
+                    </div>
+                    <h3>Vercel Deployment</h3>
+                    <p>Deploy React apps with automatic AI model integration</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Zero-config deployment</li>
+                        <li><i class="fas fa-check"></i> Edge functions</li>
+                        <li><i class="fas fa-check"></i> AI API integration</li>
+                    </ul>
+                    <button class="btn-primary" onclick="deployToVercel()">Deploy to Vercel</button>
+                </div>
+
+                <div class="deploy-card">
+                    <div class="deploy-icon">
+                        <i class="fab fa-netlify"></i>
+                    </div>
+                    <h3>Netlify Integration</h3>
+                    <p>Deploy with Netlify and connect AI services</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Continuous deployment</li>
+                        <li><i class="fas fa-check"></i> Serverless functions</li>
+                        <li><i class="fas fa-check"></i> Form handling</li>
+                    </ul>
+                    <button class="btn-primary" onclick="deployToNetlify()">Deploy to Netlify</button>
+                </div>
+
+                <div class="deploy-card">
+                    <div class="deploy-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Custom Cloud</h3>
+                    <p>Deploy to AWS, Google Cloud, or Azure</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Docker containers</li>
+                        <li><i class="fas fa-check"></i> Kubernetes support</li>
+                        <li><i class="fas fa-check"></i> Custom domains</li>
+                    </ul>
+                    <button class="btn-primary" onclick="openCustomDeployModal()">Custom Setup</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- React Tools Section -->
+    <section class="tools">
+        <div class="container">
+            <div class="section-header">
+                <h2>React Development Tools</h2>
+                <p>Everything you need to build modern AI applications with React</p>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <i class="fab fa-react"></i>
+                    <h3>React 18</h3>
+                    <p>Latest React features with concurrent rendering</p>
+                </div>
+                <div class="tool-card">
+                    <i class="fab fa-node-js"></i>
+                    <h3>Next.js 14</h3>
+                    <p>Full-stack React framework with AI integration</p>
+                </div>
+                <div class="tool-card">
+                    <i class="fab fa-js"></i>
+                    <h3>TypeScript</h3>
+                    <p>Type-safe development for better code quality</p>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Tailwind CSS</h3>
+                    <p>Utility-first CSS framework for rapid UI development</p>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-database"></i>
+                    <h3>AI APIs</h3>
+                    <p>Integrate OpenAI, Replicate, and HuggingFace</p>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>State Management</h3>
+                    <p>Zustand, Redux Toolkit, and React Query</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="community">
+        <div class="container">
+            <div class="section-header">
+                <h2>React AI Community</h2>
+                <p>Join thousands of developers building AI applications with React</p>
+            </div>
+            
+            <div class="community-features">
+                <div class="feature-card">
+                    <i class="fas fa-share-alt"></i>
+                    <h3>Share Components</h3>
+                    <p>Share React components and AI integrations</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Collaborate</h3>
+                    <p>Work with other React developers on AI projects</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Hackathons</h3>
+                    <p>Participate in React AI hackathons and win prizes</p>
+                </div>
+            </div>
+
+            <div class="community-stats">
+                <div class="stat-card">
+                    <h3>1,000+</h3>
+                    <p>React Components</p>
+                </div>
+                <div class="stat-card">
+                    <h3>5,000+</h3>
+                    <p>Forks Created</p>
+                </div>
+                <div class="stat-card">
+                    <h3>100+</h3>
+                    <p>Active Contributors</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>React Hub</h3>
+                    <p>Build AI applications with React. Deploy to Vercel, Netlify, and more.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Frameworks</h4>
+                    <ul>
+                        <li><a href="#">React</a></li>
+                        <li><a href="#">Next.js</a></li>
+                        <li><a href="#">Gatsby</a></li>
+                        <li><a href="#">Vite</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Getting Started</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Stay updated with React AI development.</p>
+                    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 React Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Create App Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('createModal')">&times;</span>
+            <h2>Create New React AI App</h2>
+            <form id="createAppForm" onsubmit="createNewApp(event)">
+                <div class="form-group">
+                    <label for="appName">App Name</label>
+                    <input type="text" id="appName" name="appName" required placeholder="My AI App">
+                </div>
+                <div class="form-group">
+                    <label for="appType">App Type</label>
+                    <select id="appType" name="appType" required>
+                        <option value="">Select App Type</option>
+                        <option value="chat">AI Chat Interface</option>
+                        <option value="image">Image Generator</option>
+                        <option value="data">Data Dashboard</option>
+                        <option value="voice">Voice Assistant</option>
+                        <option value="custom">Custom App</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="framework">Framework</label>
+                    <select id="framework" name="framework" required>
+                        <option value="">Select Framework</option>
+                        <option value="react">React</option>
+                        <option value="nextjs">Next.js</option>
+                        <option value="gatsby">Gatsby</option>
+                        <option value="vite">Vite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aiProvider">AI Provider</label>
+                    <select id="aiProvider" name="aiProvider">
+                        <option value="">Select AI Provider</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="replicate">Replicate</option>
+                        <option value="huggingface">HuggingFace</option>
+                        <option value="custom">Custom API</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('createModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Create App</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Template Modal -->
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('templateModal')">&times;</span>
+            <h2>AI-Powered Templates</h2>
+            <div class="template-grid">
+                <div class="template-card" onclick="useTemplate('chat-template')">
+                    <div class="template-preview">
+                        <img src="https://via.placeholder.com/200x150/61dafb/ffffff?text=Chat+Template" alt="Chat Template">
+                    </div>
+                    <h3>AI Chat Template</h3>
+                    <p>Ready-to-use chat interface with OpenAI integration</p>
+                    <div class="template-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">OpenAI</span>
+                        <span class="tag">Tailwind</span>
+                    </div>
+                    <button class="btn-primary">Use Template</button>
+                </div>
+                <div class="template-card" onclick="useTemplate('image-template')">
+                    <div class="template-preview">
+                        <img src="https://via.placeholder.com/200x150/764abc/ffffff?text=Image+Template" alt="Image Template">
+                    </div>
+                    <h3>Image Generator Template</h3>
+                    <p>Stable Diffusion integration with React</p>
+                    <div class="template-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Stable Diffusion</span>
+                        <span class="tag">TypeScript</span>
+                    </div>
+                    <button class="btn-primary">Use Template</button>
+                </div>
+                <div class="template-card" onclick="useTemplate('dashboard-template')">
+                    <div class="template-preview">
+                        <img src="https://via.placeholder.com/200x150/38bdf8/ffffff?text=Dashboard+Template" alt="Dashboard Template">
+                    </div>
+                    <h3>Data Dashboard Template</h3>
+                    <p>AI-powered analytics dashboard</p>
+                    <div class="template-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Charts</span>
+                        <span class="tag">AI Analytics</span>
+                    </div>
+                    <button class="btn-primary">Use Template</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Generator Modal -->
+    <div id="imageGeneratorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('imageGeneratorModal')">&times;</span>
+            <h2>AI Image Generator</h2>
+            <div class="image-generator">
+                <div class="prompt-section">
+                    <label for="imagePrompt">Describe the image you want to generate:</label>
+                    <textarea id="imagePrompt" placeholder="A futuristic React logo floating in space with AI particles..." rows="3"></textarea>
+                    <div class="prompt-options">
+                        <select id="imageStyle">
+                            <option value="realistic">Realistic</option>
+                            <option value="artistic">Artistic</option>
+                            <option value="cartoon">Cartoon</option>
+                            <option value="abstract">Abstract</option>
+                        </select>
+                        <select id="imageSize">
+                            <option value="512x512">512x512</option>
+                            <option value="1024x1024">1024x1024</option>
+                            <option value="1024x768">1024x768</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="generateImage()">Generate Image</button>
+                </div>
+                <div class="image-result">
+                    <div id="imagePreview" class="image-preview">
+                        <i class="fas fa-image"></i>
+                        <p>Generated image will appear here</p>
+                    </div>
+                    <div class="image-actions" id="imageActions" style="display: none;">
+                        <button class="btn-secondary" onclick="downloadImage()">Download</button>
+                        <button class="btn-secondary" onclick="useInProject()">Use in Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div id="importModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('importModal')">&times;</span>
+            <h2>Import Existing Project</h2>
+            <div class="import-options">
+                <div class="import-option">
+                    <h3><i class="fab fa-github"></i> GitHub Repository</h3>
+                    <input type="text" placeholder="https://github.com/username/repo" id="githubUrl">
+                    <button class="btn-primary" onclick="importFromGitHub()">Import from GitHub</button>
+                </div>
+                <div class="import-option">
+                    <h3><i class="fas fa-file-archive"></i> Upload ZIP File</h3>
+                    <input type="file" accept=".zip" id="zipFile">
+                    <button class="btn-primary" onclick="importFromZip()">Upload and Import</button>
+                </div>
+                <div class="import-option">
+                    <h3><i class="fas fa-link"></i> Direct URL</h3>
+                    <input type="url" placeholder="https://example.com/project" id="projectUrl">
+                    <button class="btn-primary" onclick="importFromUrl()">Import from URL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Deploy Modal -->
+    <div id="customDeployModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('customDeployModal')">&times;</span>
+            <h2>Custom Cloud Deployment</h2>
+            <form id="customDeployForm" onsubmit="setupCustomDeployment(event)">
+                <div class="form-group">
+                    <label for="cloudProvider">Cloud Provider</label>
+                    <select id="cloudProvider" name="cloudProvider" required>
+                        <option value="">Select Provider</option>
+                        <option value="aws">AWS</option>
+                        <option value="gcp">Google Cloud Platform</option>
+                        <option value="azure">Microsoft Azure</option>
+                        <option value="digitalocean">DigitalOcean</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="deploymentType">Deployment Type</label>
+                    <select id="deploymentType" name="deploymentType" required>
+                        <option value="">Select Type</option>
+                        <option value="docker">Docker Container</option>
+                        <option value="kubernetes">Kubernetes</option>
+                        <option value="serverless">Serverless Functions</option>
+                        <option value="vm">Virtual Machine</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="domain">Custom Domain (Optional)</label>
+                    <input type="text" id="domain" name="domain" placeholder="myapp.com">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('customDeployModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Setup Deployment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingText">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Success/Error Notifications -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="React_Hub.js"></script>
+</body>
+</html>
